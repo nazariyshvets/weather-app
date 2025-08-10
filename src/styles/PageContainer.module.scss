@@ -1,5 +1,6 @@
+@use 'variables' as *;
+
 .container {
-  max-width: 960px;
-  margin: 0 auto;
+  @include main-container;
   padding: 24px;
 }

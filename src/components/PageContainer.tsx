@@ -1,5 +1,7 @@
 import { ReactNode } from 'react';
 
+import { NavBar } from '@/components/NavBar';
+
 import styles from '@/styles/PageContainer.module.scss';
 
 interface PageContainerProps {
@@ -7,5 +9,10 @@ interface PageContainerProps {
 }
 
 export const PageContainer = ({ children }: PageContainerProps) => {
-  return <div className={styles.container}>{children}</div>;
+  return (
+    <>
+      <NavBar />
+      <div className={styles.container}>{children}</div>
+    </>
+  );
 };

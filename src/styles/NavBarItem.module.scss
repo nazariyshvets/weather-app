@@ -1,0 +1,10 @@
+@use 'variables' as *;
+
+.title {
+  margin: 0;
+  transition: color 0.2s;
+
+  &:hover {
+    color: $color-blue;
+  }
+}

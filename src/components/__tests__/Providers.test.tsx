@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import Providers from '../Providers';
+import { Providers } from '../Providers';
 
 describe('Providers', () => {
   it('renders children correctly', () => {

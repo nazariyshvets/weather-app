@@ -1,0 +1,15 @@
+@use 'variables' as *;
+
+.header {
+  background: #fff;
+  padding: 0 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+
+  .inner {
+    @include main-container;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    height: 100%;
+  }
+}
