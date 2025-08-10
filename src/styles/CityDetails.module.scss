@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .title {
+    margin: 0;
+  }
+
+  .now {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+
+    .nowTemp {
+      font-size: 32px;
+      font-weight: 600;
+    }
+  }
+}

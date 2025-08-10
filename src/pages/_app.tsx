@@ -1,14 +1,16 @@
 import type { AppProps } from 'next/app';
 
-import Providers from '@/components/Providers';
+import { Providers } from '@/components/Providers';
+import { PageContainer } from '@/components/PageContainer';
 
-import 'antd/dist/reset.css';
 import '@/styles/globals.css';
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
     <Providers>
-      <Component {...pageProps} />
+      <PageContainer>
+        <Component {...pageProps} />
+      </PageContainer>
     </Providers>
   );
 };

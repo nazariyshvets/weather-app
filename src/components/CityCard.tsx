@@ -18,7 +18,7 @@ interface CityCardProps {
   onRemove: (name: string) => void;
 }
 
-const CityCard = ({ city, onRemove }: CityCardProps) => {
+export const CityCard = ({ city, onRemove }: CityCardProps) => {
   const { data, isLoading, isError, refetch, isRefetching } = useWeatherQuery(
     city.name
   );
@@ -81,5 +81,3 @@ const CityCard = ({ city, onRemove }: CityCardProps) => {
     </Card>
   );
 };
-
-export default CityCard;

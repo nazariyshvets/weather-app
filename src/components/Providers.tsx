@@ -9,7 +9,7 @@ interface ProvidersProps {
   children: React.ReactNode;
 }
 
-const Providers = ({ children }: ProvidersProps) => {
+export const Providers = ({ children }: ProvidersProps) => {
   const [queryClient] = useState(
     () =>
       new QueryClient({
@@ -30,5 +30,3 @@ const Providers = ({ children }: ProvidersProps) => {
     </QueryClientProvider>
   );
 };
-
-export default Providers;

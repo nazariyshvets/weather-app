@@ -2,7 +2,7 @@
 
 import { Row, Col, Empty } from 'antd';
 
-import CityCard from '@/components/CityCard';
+import { CityCard } from '@/components/CityCard';
 import { City } from '@/types/weather';
 
 interface CityListProps {
