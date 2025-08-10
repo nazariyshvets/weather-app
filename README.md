@@ -41,10 +41,11 @@ Open `http://localhost:3000` in your browser.
 
 ### Tech stack
 
-- Next.js App Router
-- React 19
+- Next.js Pages Router
+- React 18
 - @tanstack/react-query for data fetching and caching
 - Ant Design for UI primitives
+- Recharts for graphs
 
 ### Notes
 
