@@ -1,15 +1,15 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
-import { City } from '@/types/weather';
+import { City, ForecastData, WeatherData } from '@/types/weather';
 
 const STORAGE_KEY = 'weather-app-cities';
 
 export const useCities = () => {
   const [cities, setCities] = useState<City[]>([]);
+  const isMounted = useRef(false);
 
-  // Load cities from localStorage on mount
   useEffect(() => {
     const savedCities = localStorage.getItem(STORAGE_KEY);
     if (savedCities) {
@@ -22,15 +22,18 @@ export const useCities = () => {
     }
   }, []);
 
-  // Save cities to localStorage whenever cities change
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(cities));
+    if (isMounted.current) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(cities));
+    } else {
+      isMounted.current = true;
+    }
   }, [cities]);
 
   const addCity = (cityName: string) => {
     const normalizedCityName = cityName.trim();
     if (!normalizedCityName) {
-      return;
+      throw new Error('City name is required');
     }
 
     const existingCity = cities.find(
@@ -43,7 +46,6 @@ export const useCities = () => {
 
     const newCity: City = {
       name: normalizedCityName,
-      country: '',
     };
 
     setCities((prev) => [...prev, newCity]);
@@ -53,7 +55,7 @@ export const useCities = () => {
     setCities((prev) => prev.filter((city) => city.name !== cityName));
   };
 
-  const updateCityWeather = (cityName: string, weatherData: any) => {
+  const updateCityWeather = (cityName: string, weatherData: WeatherData) => {
     setCities((prev) =>
       prev.map((city) =>
         city.name === cityName ? { ...city, weatherData } : city
@@ -61,7 +63,7 @@ export const useCities = () => {
     );
   };
 
-  const updateCityForecast = (cityName: string, forecastData: any) => {
+  const updateCityForecast = (cityName: string, forecastData: ForecastData) => {
     setCities((prev) =>
       prev.map((city) =>
         city.name === cityName ? { ...city, forecastData } : city

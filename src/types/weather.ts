@@ -91,7 +91,6 @@ export interface ForecastData {
 
 export interface City {
   name: string;
-  country: string;
   weatherData?: WeatherData;
   forecastData?: ForecastData;
 }
