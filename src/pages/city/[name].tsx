@@ -1,10 +1,11 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { Typography, Card, Skeleton, Alert } from 'antd';
+import { Typography, Card, Skeleton, Alert, Space } from 'antd';
 
+import { MetaItem } from '@/components/MetaItem';
 import { TempLineChart } from '@/components/TempLineChart';
 import { useWeatherQuery, useForecastQuery } from '@/hooks/useWeatherQueries';
-import { filterTodayTemps } from '@/utils/common';
+import { filterTodayTemps, getMetaItems } from '@/utils/common';
 
 import styles from '@/styles/CityDetails.module.scss';
 
@@ -33,7 +34,7 @@ const CityDetailsPage = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>{cityName} · Weather</title>
+        <title>{`${cityName} · Weather`}</title>
       </Head>
 
       <Title level={2} className={styles.title}>
@@ -46,12 +47,25 @@ const CityDetailsPage = () => {
         ) : isWeatherError || !weather ? (
           <Alert type="error" message="Failed to load current weather" />
         ) : (
-          <div className={styles.now}>
-            <Text className={styles.nowTemp}>
-              {Math.round(weather.main.temp)}°C
-            </Text>
-            <Text type="secondary">{weather.weather[0].description}</Text>
-          </div>
+          <Space direction="vertical" size={12} style={{ width: '100%' }}>
+            <div className={styles.now}>
+              <Text className={styles.nowTemp}>
+                {Math.round(weather.main.temp)}°C
+              </Text>
+              <Text type="secondary">{weather.weather[0].description}</Text>
+            </div>
+
+            <div className={styles.metaList}>
+              {getMetaItems(weather).map((item) => (
+                <MetaItem
+                  key={item.label}
+                  icon={item.icon}
+                  label={item.label}
+                  value={item.value}
+                />
+              ))}
+            </div>
+          </Space>
         )}
       </Card>
 
