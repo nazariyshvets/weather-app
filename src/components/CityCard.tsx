@@ -1,6 +1,14 @@
 'use client';
 
-import { Card, Button, Typography, Space, Skeleton, Tooltip } from 'antd';
+import {
+  Card,
+  Button,
+  Typography,
+  Space,
+  Skeleton,
+  Tooltip,
+  message,
+} from 'antd';
 import { SyncOutlined, DeleteOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -23,6 +31,15 @@ export const CityCard = ({ city, onRemove }: CityCardProps) => {
     city.name
   );
 
+  const handleRefresh = () => {
+    try {
+      refetch();
+      message.success('Refresh was successful');
+    } catch {
+      message.error('Something went wrong during refresh');
+    }
+  };
+
   return (
     <Card
       hoverable
@@ -35,7 +52,7 @@ export const CityCard = ({ city, onRemove }: CityCardProps) => {
             <Tooltip title="Refresh now">
               <Button
                 size="small"
-                onClick={() => refetch()}
+                onClick={handleRefresh}
                 loading={isRefetching}
               >
                 <SyncOutlined />
